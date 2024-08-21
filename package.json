@@ -1,0 +1,36 @@
+{
+  "name": "perro-cafe-ecommerce",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "prepare": "panda codegen && husky",
+    "dev": "rm -rf .next && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@logtail/next": "0.1.5",
+    "axios": "1.7.4",
+    "eslint-plugin-adonis": "2.1.1",
+    "eslint-plugin-sort-destructure-keys": "1.6.0",
+    "husky": "9.1.5",
+    "next": "14.2.5",
+    "posthog-js": "1.157.2",
+    "posthog-node": "3.6.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-transition-state": "2.1.1",
+    "usehooks-ts": "3.1.0"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "0.45.1",
+    "@types/node": "22.4.2",
+    "@types/react": "18.3.4",
+    "@types/react-dom": "18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.5",
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4"
+  }
+}
