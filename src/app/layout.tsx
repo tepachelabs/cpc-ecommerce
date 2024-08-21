@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 
 import { PHProvider, PostHogPageview } from '~/app/providers'
 import { METADATA } from '~/config'
+import { CartContextProvider } from '~/lib/cart.context-provider'
 import { getBaseUrl } from '~/lib/utils'
 
 import { cx } from '../../styled-system/css'
@@ -54,7 +55,9 @@ export default function RootLayout ({ children }: { children: ReactNode }) {
       <PHProvider>
         <body>
           <PostHogPageview/>
-          { children }
+          <CartContextProvider>
+            { children }
+          </CartContextProvider>
         </body>
       </PHProvider>
     </html>

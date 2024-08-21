@@ -2,18 +2,19 @@ export const revalidate = 5
 
 import Link from 'next/link'
 
-import { CartContextProvider } from '~/lib/cart.context-provider'
+import { Section } from '~/components/atoms/section.component'
+import { PageLayout } from '~/components/page-layout'
 
 export default async function Home () {
   return (
-    <CartContextProvider>
-      <h1>Homepage</h1>
-      <p>This is the homepage</p>
-      <ul>
-        <li>
-          <Link href="/product-listing">Product Listing</Link>
-        </li>
-      </ul>
-    </CartContextProvider>
+    <PageLayout>
+      <Section title="Homepage">
+        <ul>
+          <li>
+            <Link href="/product-listing">Product Listing</Link>
+          </li>
+        </ul>
+      </Section>
+    </PageLayout>
   )
 }

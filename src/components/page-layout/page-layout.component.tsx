@@ -5,7 +5,6 @@ import { FC, PropsWithChildren } from 'react'
 import { useTransition } from 'react-transition-state'
 
 import { IconMenu } from '~/components/icons'
-import { ToTop } from '~/components/to-top'
 
 import {
   wrapper,
@@ -19,6 +18,7 @@ import {
   row,
   animatedNav,
 } from './page-layout.styles'
+import { CartStatus } from '../client/cart/cart-status'
 
 const navItems = [
   { label: 'Inicio', path: '/' },
@@ -44,7 +44,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
         <div className={ row }>
           <div className={ wrapper }>
             <Link href="/" onClick={ () => toggle(false) } className={ logo }>
-              <h1><em>Dólar</em> en Bancos</h1>
+              <h1>Known Ecommerce Platform</h1>
             </Link>
             <button className={ navTrigger({ isEnter }) } onClick={ () => toggle() }>
               <IconMenu/>
@@ -66,12 +66,12 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
       <main>
         { children }
-        <ToTop/>
+        <CartStatus />
       </main>
 
       <footer className={ footer }>
         <div className={ wrapper }>
-          <h1 className={ logo }><em>Dólar</em> en Bancos</h1>
+          <h1 className={ logo }>Known Ecommerce Platform</h1>
           <div>
             <ul className={ footerNav }>
               { footerItems.map(({ label, path }) => (
@@ -80,7 +80,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
                 </li>
               )) }
             </ul>
-            <p>&copy; 2023 Dólar en Bancos. Algunos derechos reservados.</p>
+            <p>&copy; 2020-{new Date().getFullYear()} TepacheLabs. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>

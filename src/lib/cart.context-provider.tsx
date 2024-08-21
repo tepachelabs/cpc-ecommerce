@@ -19,23 +19,32 @@ interface CartContextProps {
 export const CartContextProvider: FC<PropsWithChildren<CartContextProps>> = ({
   children,
 }) => {
-  const [entries] = useState<Map<Product['id'], number>>(new Map())
+  const [entries, setEntries] = useState<Map<Product['id'], number>>(new Map())
 
   const addItem = useCallback((id: Product['id'], quantity?: number) => {
-    if (entries.has(id)) {
-      entries.set(id, entries.get(id)! + (quantity || 1))
-    } else {
-      entries.set(id, quantity || 1)
-    }
-  }, [entries])
+    setEntries((prevEntries) => {
+      const newEntries = new Map(prevEntries)
+      const currentQuantity = newEntries.get(id) || 0
+
+      newEntries.set(id, currentQuantity + (quantity || 1))
+
+      return newEntries
+    })
+  }, [])
 
   const removeItem = useCallback((id: Product['id']) => {
-    entries.delete(id)
-  }, [entries])
+    setEntries((prevEntries) => {
+      const newEntries = new Map(prevEntries)
+
+      newEntries.delete(id)
+
+      return newEntries
+    })
+  }, [])
 
   const reset = useCallback(() => {
-    entries.clear()
-  }, [entries])
+    setEntries(new Map())
+  }, [])
 
   const value = useMemo(() => ({
     entries,

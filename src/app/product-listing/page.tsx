@@ -3,7 +3,8 @@ export const revalidate = 5
 import { log } from '@logtail/next'
 import Link from 'next/link'
 
-import { CartContextProvider } from '~/lib/cart.context-provider'
+import { Section } from '~/components/atoms/section.component'
+import { PageLayout } from '~/components/page-layout'
 import { getBaseUrl } from '~/lib/utils'
 
 interface Data {
@@ -20,19 +21,20 @@ export default async function ProductListingPage () {
   }
 
   return (
-    <CartContextProvider>
-      <h1>Products</h1>
-      <p>This is the product listing page</p>
-      <ul>
-        { data.coffee.map((product) => (
-          <li key={ product.id }>
-            <Link href={ `/product-display/${ product.id }` }>
-              <b>{ product.title }</b>
-            </Link>
-          </li>
-        )) }
-      </ul>
-    </CartContextProvider>
+    <PageLayout>
+      <Section title="Products">
+        <p>This is the product listing page</p>
+        <ul>
+          { data.coffee.map((product) => (
+            <li key={ product.id }>
+              <Link href={ `/product-display/${ product.id }` }>
+                <b>{ product.title }</b>
+              </Link>
+            </li>
+          )) }
+        </ul>
+      </Section>
+    </PageLayout>
   )
 }
 
