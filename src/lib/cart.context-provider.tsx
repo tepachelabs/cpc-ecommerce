@@ -1,15 +1,12 @@
 'use client'
 
 import { createContext, FC, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react'
-import { useBoolean } from 'usehooks-ts'
 
 // Context type
 interface CartContextType {
-  usd: number;
-  mxn: number;
-  isDirty: boolean;
-  setUsd: (price: number) => void;
-  setMxn: (price: number) => void;
+  entries: Map<Product['id'], number>;
+  addItem: (id: Product['id'], quantity?: number) => void;
+  removeItem: (id: Product['id']) => void;
   reset: () => void;
 }
 
@@ -22,29 +19,30 @@ interface CartContextProps {
 export const CartContextProvider: FC<PropsWithChildren<CartContextProps>> = ({
   children,
 }) => {
-  const { setFalse, setTrue: setIsDirty, value: isDirty } = useBoolean(false)
-  const [usd, setUsd] = useState<number>(1)
-  const [mxn, setMxn] = useState<number>(0)
+  const [entries] = useState<Map<Product['id'], number>>(new Map())
 
-  const setWithDirtyStatus = useMemo(() => (fn: any) => (args: any) => {
-    setIsDirty()
-    fn(args)
-  }, [setIsDirty])
+  const addItem = useCallback((id: Product['id'], quantity?: number) => {
+    if (entries.has(id)) {
+      entries.set(id, entries.get(id)! + (quantity || 1))
+    } else {
+      entries.set(id, quantity || 1)
+    }
+  }, [entries])
+
+  const removeItem = useCallback((id: Product['id']) => {
+    entries.delete(id)
+  }, [entries])
 
   const reset = useCallback(() => {
-    setFalse()
-    setUsd(1)
-    setMxn(0)
-  }, [setFalse])
+    entries.clear()
+  }, [entries])
 
   const value = useMemo(() => ({
-    usd,
-    mxn,
-    isDirty,
-    setUsd: setWithDirtyStatus(setUsd),
-    setMxn: setWithDirtyStatus(setMxn),
+    entries,
+    addItem,
+    removeItem,
     reset,
-  }), [isDirty, mxn, reset, setWithDirtyStatus, usd])
+  }), [addItem, entries, removeItem, reset])
 
   return (
     <CartContext.Provider value={ value }>
