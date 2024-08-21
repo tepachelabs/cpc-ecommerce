@@ -1,9 +1,10 @@
 type Product = {
-  id: string
+  id: number
   title: string
-  variants?: ProductVariant[],
-  options?: ProductOption[],
+  variants: ProductVariant[],
+  options: ProductOption[],
   image?: Image
+  /* NOTE: collection is not part of the shopify payload */
   collection: 'coffee' | 'merch' | 'misc'
 }
 
@@ -15,10 +16,11 @@ type Image = {
 }
 
 type ProductVariant = {
-  id: string
+  id: number
   title: string
   price: number
   position: number
+  [key: `option${ number }`]: string
 }
 
 type ProductOption = {

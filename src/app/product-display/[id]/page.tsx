@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { Section } from '~/components/atoms/section.component'
-import { AddToCard } from '~/components/client/cart/add-to-cart'
+import { ProductDeck } from '~/components/client/product-deck'
 import { PageLayout } from '~/components/page-layout'
 import { getProductById } from '~/lib/api.requests'
 
@@ -14,7 +14,7 @@ export default async function ProductDisplayPage ({ params }: { params: { id: st
       <Section title="Product Display">
         <h3>{ product.title }</h3>
 
-        <AddToCard productId={ product.id } quantity={ 1 }/>
+        <ProductDeck product={product} />
 
         { image && (
           <Image

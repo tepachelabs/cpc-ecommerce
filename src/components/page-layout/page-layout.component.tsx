@@ -21,15 +21,15 @@ import {
 import { CartStatus } from '../client/cart/cart-status'
 
 const navItems = [
-  { label: 'Inicio', path: '/' },
-  { label: 'Histórico', path: '/#historico' },
-  { label: 'Bots', path: '/#bots' },
+  { label: 'Home', path: '/' },
+  { label: 'Listing', path: '/product-listing' },
+  { label: 'Cart', path: '/cart' },
 ]
 
 const footerItems = [
-  { label: 'Acerca', path: '/acerca' },
-  { label: 'Términos', path: '/terminos' },
-  { label: 'Privacidad', path: '/privacidad' },
+  { label: 'Acerca', path: '#1' },
+  { label: 'Términos', path: '#2' },
+  { label: 'Privacidad', path: '#3' },
 ]
 
 export const PageLayout: FC<PropsWithChildren> = ({ children }) => {

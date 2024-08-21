@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { FC, useMemo } from 'react'
 
 import { useCartContext } from '~/lib/cart.context-provider'
@@ -20,9 +21,8 @@ export const CartStatus: FC = () => {
   }, [entries])
 
   return (
-    <button onClick={ () => {
-    } } className={ button }>
+    <Link className={ button } href='/cart'>
       <p>Cart ({ total })</p>
-    </button>
+    </Link>
   )
 }

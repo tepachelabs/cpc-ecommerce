@@ -3,7 +3,7 @@ import { button as _button } from '~/components/atoms/button.cva'
 import { css } from '../../../../../styled-system/css'
 
 export const button = css({
-  ..._button.raw(),
+  ..._button.raw({ type: 'icon' }),
   bottom: '1em',
   position: 'fixed',
   right: '1em',
