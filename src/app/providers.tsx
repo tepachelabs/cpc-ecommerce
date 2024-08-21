@@ -3,10 +3,12 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import posthog from 'posthog-js'
 import { PostHogProvider, usePostHog } from 'posthog-js/react'
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
 
 if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!!, {
+  const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
+
+  posthogKey && posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
   })
@@ -38,8 +40,6 @@ export function PostHogPageview () {
 
 export function PHProvider ({ children }: { children: React.ReactNode }) {
   return (
-    <Suspense>
-      <PostHogProvider client={ posthog }>{ children }</PostHogProvider>
-    </Suspense>
+    <PostHogProvider client={ posthog }>{ children }</PostHogProvider>
   )
 }
