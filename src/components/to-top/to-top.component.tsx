@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { useBoolean, useEffectOnce } from 'usehooks-ts'
+import { FC, useEffect } from 'react'
+import { useBoolean } from 'usehooks-ts'
 
 import { IconChevronUp } from '~/components/icons'
 
@@ -10,17 +10,11 @@ const heightLimit = 500
 export const ToTop: FC = () => {
   const { setValue: setIsVisible, value: isVisible } = useBoolean(false)
 
-  const scrollToTop = () => {
+  function scrollToTop () {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
-  useEffectOnce(() => {
-    window.addEventListener('scroll', listenToScroll)
-    return () =>
-      window.removeEventListener('scroll', listenToScroll)
-  })
-
-  const listenToScroll = () => {
+  function listenToScroll () {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop
 
     if (winScroll > heightLimit) {
@@ -29,6 +23,13 @@ export const ToTop: FC = () => {
       setIsVisible(false)
     }
   }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenToScroll)
+    return () =>
+      window.removeEventListener('scroll', listenToScroll)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
