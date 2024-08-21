@@ -4,6 +4,7 @@ type Product = {
   variants?: ProductVariant[],
   options?: ProductOption[],
   image?: Image
+  collection: 'coffee' | 'merch' | 'misc'
 }
 
 type Image = {

@@ -1,5 +1,3 @@
-export const revalidate = 5
-
 import Link from 'next/link'
 
 import { Section } from '~/components/atoms/section.component'

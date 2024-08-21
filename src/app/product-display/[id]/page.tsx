@@ -1,21 +1,20 @@
-import { log } from '@logtail/next'
 import Image from 'next/image'
 
 import { Section } from '~/components/atoms/section.component'
 import { AddToCard } from '~/components/client/cart/add-to-cart'
 import { PageLayout } from '~/components/page-layout'
-import { getBaseUrl } from '~/lib/utils'
+import { getProductById } from '~/lib/api.requests'
 
 export default async function ProductDisplayPage ({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id)
+  const product = await getProductById(params.id)
   const image = product.image
 
   return (
     <PageLayout>
-      <Section title={ product.title } size="compact">
-        <p>This is the product display page</p>
+      <Section title="Product Display">
+        <h3>{ product.title }</h3>
 
-        <AddToCard productId={product.id} quantity={1} />
+        <AddToCard productId={ product.id } quantity={ 1 }/>
 
         { image && (
           <Image
@@ -29,20 +28,3 @@ export default async function ProductDisplayPage ({ params }: { params: { id: st
     </PageLayout>
   )
 }
-
-async function getProduct (id: string): Promise<Product> {
-  try {
-    const fetchResponse = await fetch(`${ getBaseUrl() }/api/products/${ id }`, { next: { tags: ['prices'] } })
-
-    if (!fetchResponse.ok) {
-      throw new Error('Could not fetch product')
-    }
-
-    return await fetchResponse.json()
-  } catch (error) {
-    // @ts-ignore
-    log.error(error)
-    throw new Error('Could not fetch product')
-  }
-}
-

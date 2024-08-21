@@ -6,7 +6,6 @@ import { ReactNode } from 'react'
 import { PHProvider, PostHogPageview } from '~/app/providers'
 import { METADATA } from '~/config'
 import { CartContextProvider } from '~/lib/cart.context-provider'
-import { getBaseUrl } from '~/lib/utils'
 
 import { cx } from '../../styled-system/css'
 
@@ -44,7 +43,7 @@ export async function generateMetadata (): Promise<Metadata> {
       url: METADATA.url,
       type: 'website',
       siteName: METADATA.title,
-      images: [`${ getBaseUrl() }/api/og?price=${ 0 }`],
+      // images: [`${ getBaseUrl() }/api/og?price=${ 0 }`],
     },
   } satisfies Metadata
 }
